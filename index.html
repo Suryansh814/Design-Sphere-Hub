@@ -1,0 +1,369 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Sphere Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins', sans-serif;
+}
+
+body{
+background:#0b0f17;
+color:white;
+overflow-x:hidden;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:#0d1117;
+border-bottom:1px solid #1f2733;
+position:fixed;
+width:100%;
+top:0;
+z-index:1000;
+}
+
+header h1{
+font-size:20px;
+}
+
+header span{
+color:#f5b841;
+}
+
+nav a{
+color:#9aa4b2;
+text-decoration:none;
+margin-left:20px;
+cursor:pointer;
+font-weight:500;
+padding:6px 14px;
+border-radius:8px;
+transition:0.3s;
+}
+
+nav a:hover{
+background:#f5b841;
+color:black;
+box-shadow:0 0 15px #f5b841;
+}
+
+.section{
+display:none;
+padding:120px 8%;
+min-height:100vh;
+}
+
+.active{
+display:block;
+}
+
+.hero{
+text-align:center;
+padding:180px 8%;
+}
+
+.hero h2{
+font-size:52px;
+margin-bottom:20px;
+}
+
+.hero p{
+max-width:700px;
+margin:auto;
+font-size:18px;
+line-height:1.6;
+color:#a6b0bf;
+}
+
+.about-box{
+margin-top:80px;
+background:#121826;
+padding:40px;
+border-radius:14px;
+max-width:800px;
+margin-left:auto;
+margin-right:auto;
+text-align:center;
+box-shadow:0 0 15px rgba(245,184,65,0.2);
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+background:#121826;
+padding:30px;
+border-radius:14px;
+text-align:center;
+transition:0.3s;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 20px #f5b841;
+}
+
+button{
+margin-top:10px;
+padding:10px 20px;
+border:none;
+background:#f5b841;
+color:black;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+box-shadow:0 0 15px #f5b841;
+transform:scale(1.05);
+}
+
+iframe{
+width:100%;
+height:220px;
+border-radius:12px;
+margin-top:10px;
+border:none;
+}
+
+footer{
+text-align:center;
+padding:30px;
+border-top:1px solid #1f2733;
+color:#9aa4b2;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<h1>Design<span>Sphere</span>Hub</h1>
+
+<nav>
+<a onclick="showSection('home')">Home</a>
+<a onclick="showSection('resources')">Resources</a>
+<a onclick="showSection('tutorials')">Tutorials</a>
+<a onclick="showSection('learn')">Learn</a>
+<a onclick="showSection('tools')">Tools</a>
+<a onclick="showSection('contact')">Contact</a>
+</nav>
+</header>
+
+<!-- HOME -->
+
+<section id="home" class="section active hero">
+
+<h2>All Design Tools In One Place</h2>
+
+<p>
+Your go-to platform for PNGs, logos, fonts, sound effects,
+gradients, thumbnail packs and tutorials — everything a creator needs.
+</p>
+
+<div class="about-box">
+
+<h2>Everything Creators Need</h2>
+
+<p>
+This website is built for editors, designers and creators who want
+quick access to useful resources. Just open the website, pick the
+resource you need and start creating.
+</p>
+
+</div>
+
+</section>
+
+<!-- RESOURCES -->
+
+<section id="resources" class="section">
+
+<h2>Resources</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>PNG Pack</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/12cwbkyg5CCF4wFVOG9JqIcg5rOEIu6S7?usp=drive_link')">Open</button>
+</div>
+
+<div class="card">
+<h3>Logo Pack</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1Z7SYYUu0TVfo6KFHWSlchG9PPc-v5DR6?usp=drive_link')">Open</button>
+</div>
+
+<div class="card">
+<h3>Font Collection</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1ShPUAbH_42NqtcJwg4IEcfw6XSL9rksy?usp=drive_link')">Open</button>
+</div>
+
+<div class="card">
+<h3>Sound Effects</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1oM8iV1-eOWRPM3UWzaFJ0jmBcy7dJ16v')">Open</button>
+</div>
+
+<div class="card">
+<h3>Thumbnail Pack</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1iCtXaWNzPXvTi7h4wEDO55cHGnBMsVYa?usp=drive_link')">Open</button>
+</div>
+
+<div class="card">
+<h3>Gradient Pack</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1wWqi7P9McQoI1qB1bBoN3O-ku9Lr21jc?usp=drive_link')">Open</button>
+</div>
+
+</div>
+</section>
+
+<!-- TUTORIALS -->
+
+<section id="tutorials" class="section">
+
+<h2>Editing Tutorials</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Thumbnail Tutorial</h3>
+<iframe src="https://www.youtube.com/embed/4p-xY7hWn90"></iframe>
+</div>
+
+<div class="card">
+<h3>Cinematic Edit</h3>
+<iframe src="https://www.youtube.com/embed/touRHHCyUo8"></iframe>
+</div>
+
+<div class="card">
+<h3>Poster Design</h3>
+<iframe src="https://www.youtube.com/embed/XczSJoFzMzc"></iframe>
+</div>
+
+</div>
+</section>
+
+<!-- LEARN -->
+
+<section id="learn" class="section">
+
+<h2>Learn Design Applications</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Canva Full Guide</h3>
+<iframe src="https://www.youtube.com/embed/1vzda4uh7nA"></iframe>
+</div>
+
+<div class="card">
+<h3>Figma Beginner Guide</h3>
+<iframe src="https://www.youtube.com/embed/FTFaQWZBqQ8"></iframe>
+</div>
+
+<div class="card">
+<h3>Photoshop CC Basics</h3>
+<iframe src="https://www.youtube.com/embed/IyR_uYsRdPs"></iframe>
+</div>
+
+</div>
+</section>
+
+<!-- TOOLS -->
+
+<section id="tools" class="section">
+
+<h2>Creator Tools</h2>
+
+<div class="cards">
+
+<div class="card"><h3>BG Remove</h3><button onclick="window.open('https://www.remove.bg/')">Open</button></div>
+
+<div class="card"><h3>Extension Changer</h3><button onclick="window.open('https://www.simpleimageresizer.com/image-converter')">Open</button></div>
+
+<div class="card"><h3>Image Quality Improve</h3><button onclick="window.open('https://www.cutout.pro/photo-enhancer-sharpener-upscaler')">Open</button></div>
+
+<div class="card"><h3>Figma</h3><button onclick="window.open('https://www.figma.com/')">Open</button></div>
+
+<div class="card"><h3>Photoshop CC</h3><button onclick="window.open('https://psccapk.com/')">Open</button></div>
+
+<div class="card"><h3>CapCut</h3><button onclick="window.open('https://www.capcut.com/')">Open</button></div>
+
+<div class="card"><h3>DaVinci Resolve</h3><button onclick="window.open('https://www.blackmagicdesign.com/products/davinciresolve')">Open</button></div>
+
+<div class="card"><h3>Clipchamp</h3><button onclick="window.open('https://clipchamp.com/')">Open</button></div>
+
+<div class="card"><h3>PicsArt</h3><button onclick="window.open('https://picsart.com/')">Open</button></div>
+
+<div class="card"><h3>Pinterest</h3><button onclick="window.open('https://in.pinterest.com/')">Open</button></div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="section">
+
+<h2>Contact & Help</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Need Help?</h3>
+
+<p>Click below to send mail directly.</p>
+
+<button onclick="window.location.href='mailto:designspherehub000@gmail.com'">
+Send Mail
+</button>
+
+</div>
+
+</div>
+</section>
+
+<footer>
+<p>© 2026 Design Sphere Hub | Built For Creators</p>
+</footer>
+
+<script>
+
+function showSection(id){
+
+let sections=document.querySelectorAll('.section');
+
+sections.forEach(sec=>sec.classList.remove('active'));
+
+document.getElementById(id).classList.add('active');
+
+window.scrollTo(0,0);
+
+}
+
+</script>
+
+</body>
+</html>
+```
