@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +9,44 @@
 
 <style>
 
+    .hero{
+position:relative;
+overflow:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+animation:slider 12s infinite;
+opacity:0.25;
+z-index:-1;
+pointer-events:none;
+}
+
+@keyframes slider{
+0%{background-image:url('img1.jpg');}
+12.5%{background-image:url('img2.jpg');}
+25%{background-image:url('img3.jpg');}
+37.5%{background-image:url('img4.jpg');}
+50%{background-image:url('img5.jpg');}
+62.5%{background-image:url('img6.jpg');}
+75%{background-image:url('img7.jpg');}
+87.5%{background-image:url('img8.jpg');}
+100%{background-image:url('img1.jpg');}
+}
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Poppins', sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
@@ -23,6 +55,20 @@ color:white;
 overflow-x:hidden;
 }
 
+/* CURSOR */
+.cursor{
+position:fixed;
+width:120px;
+height:120px;
+background:radial-gradient(circle,#f5b8411a,transparent);
+filter:blur(40px);
+pointer-events:none;
+border-radius:50%;
+transform:translate(-50%,-50%);
+z-index:999;
+}
+
+/* HEADER */
 header{
 display:flex;
 justify-content:space-between;
@@ -44,6 +90,14 @@ header span{
 color:#f5b841;
 }
 
+/* NAV */
+nav{
+display:flex;
+flex-wrap:nowrap;
+align-items:center;
+gap:10px;
+}
+
 nav a{
 color:#9aa4b2;
 text-decoration:none;
@@ -53,27 +107,39 @@ font-weight:500;
 padding:6px 14px;
 border-radius:8px;
 transition:0.3s;
+white-space:nowrap;
 }
 
-nav a:hover{
+nav a:hover,
+nav a.active{
 background:#f5b841;
 color:black;
 box-shadow:0 0 15px #f5b841;
 }
 
+/* SECTION */
 .section{
 display:none;
 padding:120px 8%;
 min-height:100vh;
+animation:fade 0.5s ease;
 }
 
 .active{
 display:block;
 }
 
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* HERO */
 .hero{
 text-align:center;
-padding:180px 8%;
+padding:120px 8%;
+position:relative;
+z-index:1;
 }
 
 .hero h2{
@@ -89,6 +155,7 @@ line-height:1.6;
 color:#a6b0bf;
 }
 
+/* ABOUT */
 .about-box{
 margin-top:80px;
 background:#121826;
@@ -101,6 +168,7 @@ text-align:center;
 box-shadow:0 0 15px rgba(245,184,65,0.2);
 }
 
+/* CARDS */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -113,15 +181,23 @@ background:#121826;
 padding:30px;
 border-radius:14px;
 text-align:center;
-transition:0.3s;
+transition:0.4s;
 cursor:pointer;
+opacity:0;
+transform:translateY(40px);
+}
+
+.card.show{
+opacity:1;
+transform:translateY(0);
 }
 
 .card:hover{
-transform:translateY(-8px);
-box-shadow:0 0 20px #f5b841;
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 0 25px #f5b841;
 }
 
+/* BUTTON */
 button{
 margin-top:10px;
 padding:10px 20px;
@@ -139,6 +215,7 @@ box-shadow:0 0 15px #f5b841;
 transform:scale(1.05);
 }
 
+/* IFRAME */
 iframe{
 width:100%;
 height:220px;
@@ -147,32 +224,43 @@ margin-top:10px;
 border:none;
 }
 
+/* FOOTER */
 footer{
 text-align:center;
 padding:30px;
-border-top:1px solid #1f2733;
 color:#9aa4b2;
+background:transparent;
+border:none;
+}
+
+/* MOBILE */
+@media (max-width:768px){
+.hero h2{font-size:32px;}
+.hero p{font-size:15px;}
+.cards{grid-template-columns:1fr;}
+nav a{margin-left:10px;font-size:13px;}
 }
 
 </style>
 </head>
 <body>
 
+<div class="cursor"></div>
+
 <header>
 <h1>Design<span>Sphere</span>Hub</h1>
 
 <nav>
-<a onclick="showSection('home')">Home</a>
-<a onclick="showSection('resources')">Resources</a>
-<a onclick="showSection('tutorials')">Tutorials</a>
-<a onclick="showSection('learn')">Learn</a>
-<a onclick="showSection('tools')">Tools</a>
-<a onclick="showSection('contact')">Contact</a>
+<a onclick="showSection('home',this)" class="active">Home</a>
+<a onclick="showSection('resources',this)">Resources</a>
+<a onclick="showSection('tutorials',this)">Tutorials</a>
+<a onclick="showSection('learn',this)">Learn</a>
+<a onclick="showSection('tools',this)">Tools</a>
+<a onclick="showSection('contact',this)">Contact</a>
 </nav>
 </header>
 
 <!-- HOME -->
-
 <section id="home" class="section active hero">
 
 <h2>All Design Tools In One Place</h2>
@@ -194,55 +282,84 @@ resource you need and start creating.
 
 </div>
 
+<!-- 🔥 ADD THIS PART -->
+
+<div style="margin-top:60px;max-width:800px;margin-left:auto;margin-right:auto;text-align:center;">
+
+<h2 style="color:#f5b841;">Why This Website Exists?</h2>
+
+<p style="color:#9aa4b2;margin-top:15px;line-height:1.7;">
+Creators waste hours searching for assets — PNGs, fonts, music, presets.
+This platform is built to solve that problem by bringing everything into one place.
+No more wasting time — just open, pick and create.
+</p>
+
+<p style="color:#9aa4b2;margin-top:15px;line-height:1.7;">
+Whether you're a beginner or advanced editor, this hub helps you
+learn faster, work smarter and create high-quality content.
+</p>
+
+<button onclick="showSection('resources',this)" style="margin-top:25px;">
+Start Exploring
+</button>
+
+</div>
+
 </section>
 
 <!-- RESOURCES -->
-
 <section id="resources" class="section">
-
 <h2>Resources</h2>
-
 <div class="cards">
 
-<div class="card">
-<h3>PNG Pack</h3>
-<button onclick="window.open('https://drive.google.com/drive/folders/12cwbkyg5CCF4wFVOG9JqIcg5rOEIu6S7?usp=drive_link')">Open</button>
-</div>
+<div class="card"><h3>PNG Pack</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/12cwbkyg5CCF4wFVOG9JqIcg5rOEIu6S7?usp=drive_link')">Open</button></div>
 
-<div class="card">
-<h3>Logo Pack</h3>
-<button onclick="window.open('https://drive.google.com/drive/folders/1Z7SYYUu0TVfo6KFHWSlchG9PPc-v5DR6?usp=drive_link')">Open</button>
-</div>
+<div class="card"><h3>Logo Pack</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1Z7SYYUu0TVfo6KFHWSlchG9PPc-v5DR6?usp=drive_link')">Open</button></div>
 
-<div class="card">
-<h3>Font Collection</h3>
-<button onclick="window.open('https://drive.google.com/drive/folders/1ShPUAbH_42NqtcJwg4IEcfw6XSL9rksy?usp=drive_link')">Open</button>
-</div>
+<div class="card"><h3>Font Collection</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1ShPUAbH_42NqtcJwg4IEcfw6XSL9rksy?usp=drive_link')">Open</button></div>
 
-<div class="card">
-<h3>Sound Effects</h3>
-<button onclick="window.open('https://drive.google.com/drive/folders/1oM8iV1-eOWRPM3UWzaFJ0jmBcy7dJ16v')">Open</button>
-</div>
+<div class="card"><h3>Sound Effects</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1oM8iV1-eOWRPM3UWzaFJ0jmBcy7dJ16v')">Open</button></div>
 
-<div class="card">
-<h3>Thumbnail Pack</h3>
-<button onclick="window.open('https://drive.google.com/drive/folders/1iCtXaWNzPXvTi7h4wEDO55cHGnBMsVYa?usp=drive_link')">Open</button>
-</div>
+<div class="card"><h3>Thumbnail Pack</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1iCtXaWNzPXvTi7h4wEDO55cHGnBMsVYa?usp=drive_link')">Open</button></div>
 
-<div class="card">
-<h3>Gradient Pack</h3>
-<button onclick="window.open('https://drive.google.com/drive/folders/1wWqi7P9McQoI1qB1bBoN3O-ku9Lr21jc?usp=drive_link')">Open</button>
-</div>
+<div class="card"><h3>Gradient Pack</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1wWqi7P9McQoI1qB1bBoN3O-ku9Lr21jc?usp=drive_link')">Open</button></div>
+
+<div class="card"><h3>Overlays</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1495uj0-Apoh2WMuj7RkWrHuYoBfTLUVc')">Open</button></div>
+
+<div class="card"><h3>Overlays 2025</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1OM-eF--9aSWPa89TBrGbL_ZqYxtfkvqp')">Open</button></div>
+
+<div class="card"><h3>Background</h3>
+<button onclick="window.open('https://drive.google.com/drive/folders/1N-LuPSe_5iZ19v_8SlxcWY6TmB6IKojS')">Open</button></div>
+
+<div class="card"><h3>CC (XML)</h3>
+<button onclick="window.open('https://drive.google.com/file/d/1EA6-tMJTHHh-HyPN0rBHFST864bK4eNK/view?usp=drivesdk')">Open</button></div>
+
+<div class="card"><h3>Fully Loaded (XML)</h3>
+<button onclick="window.open('https://drive.google.com/file/d/1-W_qoSgHHuMTcelsm4n8fNzOZ7FFFaTg/view?usp=drivesdk')">Open</button></div>
+
+<div class="card"><h3>CC Pack (XML)</h3>
+<button onclick="window.open('https://drive.google.com/file/d/1p5RS-bnqYpytE_DFi4QxdwRIcRj3hSsm/view?usp=drivesdk')">Open</button></div>
+
+<div class="card"><h3>Shake Pack (XML)</h3>
+<button onclick="window.open('https://drive.google.com/file/d/1Ght7qQVdGAGE_Hv6r_mY1vmElE-o-gzq/view?usp=drivesdk')">Open</button></div>
+
+<div class="card"><h3>Zoom Effects (XML)</h3>
+<button onclick="window.open('https://drive.google.com/file/d/1-GeivMt3yKdkojbgwfWpJQMMtW-_1KH0/view?usp=drivesdk')">Open</button></div>
 
 </div>
 </section>
 
 <!-- TUTORIALS -->
-
 <section id="tutorials" class="section">
-
 <h2>Editing Tutorials</h2>
-
 <div class="cards">
 
 <div class="card">
@@ -260,15 +377,48 @@ resource you need and start creating.
 <iframe src="https://www.youtube.com/embed/XczSJoFzMzc"></iframe>
 </div>
 
+<div class="card">
+<h3>Masking</h3>
+<iframe src="https://www.youtube.com/embed/KThIIQukeq0"></iframe>
+</div>
+
+<div class="card">
+<h3>Color Grading</h3>
+<iframe src="https://www.youtube.com/embed/-dO8De-QJDE"></iframe>
+</div>
+
+<div class="card">
+<h3>Minimals Reels Edit</h3>
+<iframe src="https://www.youtube.com/embed/zb-KlyScugo"></iframe>
+</div>
+
+<div class="card">
+<h3>How to start Editing(2026)</h3>
+<iframe src="https://www.youtube.com/embed/hshbHUgmYhk"></iframe>
+</div>
+
+<div class="card">
+<h3>3D Editing In Mobile</h3>
+<iframe src="https://www.youtube.com/embed/M5uR26kiHuU"></iframe>
+</div>
+
+<div class="card">
+<h3>Skull Face</h3>
+<iframe src="https://www.youtube.com/embed/VNro_6DfgiE"></iframe>
+</div>
+
+<div class="card">
+<h3>Zoom + Shake</h3>
+<iframe src="https://www.youtube.com/embed/Tx3_I9TCYNA"></iframe>
+</div>
+
+
 </div>
 </section>
 
 <!-- LEARN -->
-
 <section id="learn" class="section">
-
 <h2>Learn Design Applications</h2>
-
 <div class="cards">
 
 <div class="card">
@@ -286,62 +436,156 @@ resource you need and start creating.
 <iframe src="https://www.youtube.com/embed/IyR_uYsRdPs"></iframe>
 </div>
 
+<div class="card">
+<h3>6 Best Software</h3>
+<iframe src="https://www.youtube.com/embed/0RkaS4oxs6o"></iframe>
+</div>
+<div class="card">
+<h3>Learn Mobile Editing</h3>
+<iframe src="https://www.youtube.com/embed/_8WA5xlV3fo"></iframe>
+</div>
+<div class="card">
+<h3>Filmora Course</h3>
+<iframe src="https://www.youtube.com/embed/1Zv6IoFu3zA"></iframe>
+</div>
+<div class="card">
+<h3>Key-Frame</h3>
+<iframe src="https://www.youtube.com/embed/n2GQEsVhuMo"></iframe>
+</div>
+<div class="card">
+<h3>Capcut</h3>
+<iframe src="https://www.youtube.com/embed/cH-_8EC1f0I"></iframe>
+</div>
+<div class="card">
+<h3>DaVinci</h3>
+<iframe src="https://www.youtube.com/embed/EEV3E2U0keQ"></iframe>
+</div>
+<div class="card">
+<h3>Premiere Pro</h3>
+<iframe src="https://www.youtube.com/embed/u4vX5RgUX0E"></iframe>
+</div>
+
+<div class="card">
+<h3>DaVinci Cource</h3>
+<iframe src="https://www.youtube.com/embed/MCDVcQIA3UM"></iframe>
+</div>
+
+<div class="card">
+<h3>Pixellab Thumanil</h3>
+<iframe src="https://www.youtube.com/embed/8moEcFXxVcA"></iframe>
+</div>
+
 </div>
 </section>
 
 <!-- TOOLS -->
-
 <section id="tools" class="section">
-
 <h2>Creator Tools</h2>
 
+<!-- SOFTWARE -->
+<h2 style="margin-top:40px;font-size:28px;color:white;">Software</h2>
 <div class="cards">
 
-<div class="card"><h3>BG Remove</h3><button onclick="window.open('https://www.remove.bg/')">Open</button></div>
-
-<div class="card"><h3>Extension Changer</h3><button onclick="window.open('https://www.simpleimageresizer.com/image-converter')">Open</button></div>
-
-<div class="card"><h3>Image Quality Improve</h3><button onclick="window.open('https://www.cutout.pro/photo-enhancer-sharpener-upscaler')">Open</button></div>
-
+<!-- yaha SOFTWARE wale cards -->
 <div class="card"><h3>Figma</h3><button onclick="window.open('https://www.figma.com/')">Open</button></div>
-
 <div class="card"><h3>Photoshop CC</h3><button onclick="window.open('https://psccapk.com/')">Open</button></div>
-
 <div class="card"><h3>CapCut</h3><button onclick="window.open('https://www.capcut.com/')">Open</button></div>
-
 <div class="card"><h3>DaVinci Resolve</h3><button onclick="window.open('https://www.blackmagicdesign.com/products/davinciresolve')">Open</button></div>
-
 <div class="card"><h3>Clipchamp</h3><button onclick="window.open('https://clipchamp.com/')">Open</button></div>
-
 <div class="card"><h3>PicsArt</h3><button onclick="window.open('https://picsart.com/')">Open</button></div>
-
 <div class="card"><h3>Pinterest</h3><button onclick="window.open('https://in.pinterest.com/')">Open</button></div>
+<div class="card"><h3>Blender</h3><button onclick="window.open('https://www.blender.org/download/')">Open</button></div>
+</div>
+
+<!-- BASIC TOOLS -->
+<h2 style="margin-top:50px;font-size:28px;color:white;">Basic Tools</h2>
+<div class="cards">
+
+<!-- yaha BASIC TOOLS -->
+<div class="card"><h3>BG Remove</h3><button onclick="window.open('https://www.remove.bg/')">Open</button></div>
+<div class="card"><h3>Extension Changer</h3><button onclick="window.open('https://www.simpleimageresizer.com/image-converter')">Open</button></div>
+<div class="card"><h3>Image Quality Improve</h3><button onclick="window.open('https://www.cutout.pro/photo-enhancer-sharpener-upscaler')">Open</button></div>
+<div class="card"><h3>Vid -> Gif</h3><button onclick="window.open('https://ezgif.com/video-to-gif')">Open</button></div>
+<div class="card"><h3>Video Size Compressor</h3><button onclick="window.open('https://www.freeconvert.com/video-compressor')">Open</button></div>
+<div class="card"><h3>Image Size Reduce</h3><button onclick="window.open('https://www.reduceimages.com/')">Open</button></div>
+<div class="card"><h3>BG Remove</h3><button onclick="window.open('https://www.remove.bg/')">Open</button></div>
+<div class="card"><h3>Passport Size Photo</h3><button onclick="window.open('https://www.cutout.pro/passport-photo-maker')">Open</button></div>
+<div class="card"><h3>Video BG Remover</h3><button onclick="window.open('https://www.remove.bg/f/remove-video-background')">Open</button></div>
+<div class="card"><h3>Audio Cutter</h3><button onclick="window.open('https://clideo.com/cut-audio')">Open</button></div>
 
 </div>
 
+<!-- SOCIAL MEDIA TOOLS -->
+<h2 style="margin-top:50px;font-size:28px;color:white;">Social Media Tools</h2>
+<div class="cards">
+
+<div class="card"><h3>YouTube Thumbnail Downloader</h3><button onclick="window.open('https://ytthumbnaildownload.com/')">Open</button></div>
+<div class="card"><h3>Instagram DP Download </h3><button onclick="window.open('https://indown.io/insta-dp-viewer')">Open</button></div>
+<div class="card"><h3>Reel Download </h3><button onclick="window.open('https://fastvideosave.net/')">Open</button></div>
+<div class="card"><h3>YouTube Tags Extractor</h3><button onclick="window.open('https://www.tunepocket.com/youtube-tags-inspector/')">Open</button></div>
+</div>
+
+<!-- CONTENT CREATOR TOOLS -->
+<h2 style="margin-top:50px;font-size:28px;color:white;">Content Creator Tools</h2>
+<div class="cards">
+
+<div class="card"><h3>AI Caption Generator</h3><button onclick="window.open('https://www.copy.ai/tools/caption-generator')">Open</button></div>
+<div class="card"><h3>Youtube Title Generator </h3><button onclick="window.open('https://www.veed.io/tools/script-generator/youtube-title-generator')">Open</button></div>
+<div class="card"><h3>Script Generator</h3><button onclick="window.open('https://quillbot.com/ai-writing-tools/ai-script-generator')">Open</button></div>
+<div class="card"><h3>HashTag Generator</h3><button onclick="window.open('https://www.teleprompter.com/tools/youtube-hashtag-generator')">Open</button></div>
+</div>
+
+<!-- ADVANCED TOOLS -->
+<h2 style="margin-top:50px;font-size:28px;color:white;">Advanced Tools</h2>
+<div class="cards">
+
+<div class="card"><h3>Video Upscaler</h3><button onclick="window.open('https://www.cutout.pro/video-enhancer-sharpener-upscaler')">Open</button></div>
+<div class="card"><h3>Screen Recorder</h3><button onclick="window.open('https://obsproject.com/download')">Open</button></div>
+<div class="card"><h3>FPS Convertor</h3><button onclick="window.open('https://videobolt.net/simple-video-tools/fps')">Open</button></div>
+<div class="card"><h3>File Convertor</h3><button onclick="window.open('https://www.online-convert.com/')">Open</button></div>
+
+</div>
 </section>
 
 <!-- CONTACT -->
-
 <section id="contact" class="section">
-
 <h2>Contact & Help</h2>
 
 <div class="cards">
 
 <div class="card">
-
 <h3>Need Help?</h3>
-
 <p>Click below to send mail directly.</p>
-
 <button onclick="window.location.href='mailto:designspherehub000@gmail.com'">
 Send Mail
 </button>
-
 </div>
 
 </div>
+
+<!-- 🔥 ADD 1 (Let’s Connect) -->
+<div style="margin-top:40px;text-align:center;">
+
+<h2 style="color:#f5b841;">Let’s Connect</h2>
+
+<p style="color:#9aa4b2;margin-top:10px;">
+Got questions, suggestions or want to collaborate?
+Feel free to reach out anytime.
+</p>
+
+</div>
+
+<!-- 🔥 ADD 3 (Quick Help Box) -->
+<div style="margin-top:40px;background:#121826;padding:30px;border-radius:14px;text-align:center;box-shadow:0 0 15px rgba(245,184,65,0.2);">
+
+<h3 style="color:#f5b841;">Need Quick Help?</h3>
+
+<p style="color:#9aa4b2;margin-top:10px;">
+We usually reply within 24 hours. Stay connected and keep creating 🚀
+</p>
+
+</div>
+
 </section>
 
 <footer>
@@ -350,20 +594,32 @@ Send Mail
 
 <script>
 
-function showSection(id){
-
-let sections=document.querySelectorAll('.section');
-
-sections.forEach(sec=>sec.classList.remove('active'));
-
+function showSection(id,el){
+document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 
-window.scrollTo(0,0);
+document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+el.classList.add('active');
 
+window.scrollTo(0,0);
 }
+
+/* CURSOR */
+document.addEventListener("mousemove",(e)=>{
+document.querySelector(".cursor").style.left=e.clientX+"px";
+document.querySelector(".cursor").style.top=e.clientY+"px";
+});
+
+/* CARD ANIMATION */
+window.addEventListener("scroll",()=>{
+document.querySelectorAll(".card").forEach(card=>{
+if(card.getBoundingClientRect().top < window.innerHeight-100){
+card.classList.add("show");
+}
+});
+});
 
 </script>
 
 </body>
 </html>
-```
