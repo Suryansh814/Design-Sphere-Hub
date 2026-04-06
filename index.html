@@ -13,7 +13,16 @@
 position:relative;
 overflow:hidden;
 }
-
+header::after{
+content:"";
+position:absolute;
+right:0;
+top:0;
+height:100%;
+width:40px;
+background:linear-gradient(to left, #0d1117, transparent);
+pointer-events:none;
+}
 body::before{
 content:"";
 position:fixed;
@@ -95,7 +104,7 @@ nav{
 display:flex;
 flex-wrap:nowrap;
 align-items:center;
-gap:10px;
+gap:6px;
 overflow-x:auto;
 scrollbar-width:none;
 }
@@ -103,7 +112,6 @@ scrollbar-width:none;
 nav::-webkit-scrollbar{
 display:none;
 }
-
 nav a{
 color:#9aa4b2;
 text-decoration:none;
@@ -241,14 +249,20 @@ border:none;
 
 /* MOBILE */
 @media (max-width:768px){
-.hero h2{font-size:32px;}
-.hero p{font-size:15px;}
-.cards{grid-template-columns:1fr;}
-nav a{
-margin-left:8px;
-font-size:12px;
-padding:5px 10px;
+
+/* LOGO chhota */
+header h1{
+font-size:16px;
+white-space:nowrap;
 }
+
+/* NAV links compact */
+nav a{
+margin-left:6px;
+font-size:11px;
+padding:4px 8px;
+}
+
 }
 
 </style>
