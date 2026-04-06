@@ -96,6 +96,12 @@ display:flex;
 flex-wrap:nowrap;
 align-items:center;
 gap:10px;
+overflow-x:auto;
+scrollbar-width:none;
+}
+
+nav::-webkit-scrollbar{
+display:none;
 }
 
 nav a{
@@ -238,7 +244,11 @@ border:none;
 .hero h2{font-size:32px;}
 .hero p{font-size:15px;}
 .cards{grid-template-columns:1fr;}
-nav a{margin-left:10px;font-size:13px;}
+nav a{
+margin-left:8px;
+font-size:12px;
+padding:5px 10px;
+}
 }
 
 </style>
